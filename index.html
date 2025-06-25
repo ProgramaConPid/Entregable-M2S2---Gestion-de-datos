@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <title>Inventario Interactivo</title>
+</head>
+<body>
+
+  <main class="main__content">
+    <h1 class="main__title">
+      Dashboard - Inventario Interactivo
+    </h1>
+
+    <div class="container__buttons">
+      <button id="addProduct" onclick="addProduct()">Agregar Producto</button>
+      <button id="deleteProduct" onclick="deleteProduct()">Eliminar Producto</button>
+      <button id="showProducts" onclick="showProducts()">Mostrar Productos</button>
+    </div>
+
+    <input type="checkbox" class="check">
+  </main>
+  
+  <script src="./gestion_datos.js"></script>
+</body>
+</html>

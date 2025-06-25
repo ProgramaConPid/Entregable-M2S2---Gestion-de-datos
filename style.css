@@ -1,0 +1,54 @@
+:root {
+  --font-noto: "Noto Sans", sans-serif;
+  --gradient: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--gradient);
+  font-family: var(--font-noto);
+}
+
+main.main__content {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+  display: grid;
+  gap: 1rem;
+  transition: 400ms ease;
+}
+
+.main__title {
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
+}
+
+.container__buttons {
+  width: max-content;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: .5rem;
+}
+
+.container__buttons > button {
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+}
