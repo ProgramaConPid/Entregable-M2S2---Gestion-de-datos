@@ -1,6 +1,7 @@
+// ? Welcome message to the program
 console.log("Gestion de datos con Objetos, Sets y Maps.");
 
-// Started products in an object
+// ? Started products in an object
 let products = {
   1: {id: 1, name: "Portatil Dell", price: 1750},
   2: {id: 2, name: "Teclado Redragon", price: 500},
@@ -9,11 +10,11 @@ let products = {
 
 console.log("Productos registrados en el inventario", products);
 
-// Avoid duplicate products using Set
+// ? Avoid duplicate products using Set
 let setProducts = Object.values(products).map((product) => product.name)
 console.log("Set de productos unicos", setProducts);
 
-// Create a map to asscoiate each category with their respective product
+// ? Create a map to asscoiate each category with their respective product
 let mapProducts = new Map([
   ["Electronica", `${products[1].name}`],
   ["Accesorios", `${products[2].name}`],
@@ -21,17 +22,17 @@ let mapProducts = new Map([
 ])
 console.log("Mapa de productos y categorias", mapProducts);
 
-// Iterate the object using the loop for in
+// ? Iterate the object using the loop for in
 for (const id in products) {
   console.log(`Product ID:${id} =>`, products[id]);
 }
 
-// Iterate the Set using the loop for of
+// ? Iterate the Set using the loop for of
 for (const product of setProducts) {
   console.log(`Producto unico: ${product}`);
 }
 
-// Iterate the Map using the loop forEach
+// ? Iterate the Map using the loop forEach
 console.log("\n -- Products -- \n");
 mapProducts.forEach((product, key) => {
   
@@ -39,7 +40,7 @@ mapProducts.forEach((product, key) => {
 
 })
 
-// Testing and Validations
+// ? Testing and Validations
 console.group("Pruebas y Validaciones");
 console.log("Productos registrados: ", products);
 console.log("Productos registrados unicos: ", setProducts);
@@ -64,13 +65,14 @@ function addProduct() {
   }
 
   let name = prompt("Ingrese el nombre del producto:");
+  let category = prompt("Ingresa la categoria del producto:")
   let price = parseFloat(prompt("Ingrese el precio del producto:"));
 
   // ? Validates if all the data is right
-  if (id && name && !isNaN(price)) {
+  if (id && name && category && !isNaN(price)) {
     products[id] = {id: parseInt(id), name: name, price: price};
     setProducts.push(name);
-    mapProducts.set("name", name);
+    mapProducts.set(category, name);
     alert("Producto agregado exitosamente.");
   } else {
     alert("Datos invalidos. Por favor, intente de nuevo.");
@@ -87,9 +89,18 @@ function deleteProduct() {
   } else {
     let found = false; 
 
+    // ? Iterate through the products object to find the product by name
     for (const id in products) {
       if (productName.toLowerCase() === products[id].name.toLowerCase()) {
         delete products[id];
+        // ? Remove the product from the set
+        mapProducts.forEach((value, key) => {
+          if (value.toLowerCase() === productName.toLowerCase()) {
+            mapProducts.delete(key);
+          }
+        });
+        // ? Remove the product from the setProducts array
+        setProducts = setProducts.filter(product => product.toLowerCase() !== productName.toLowerCase());
         alert(`✅ Producto "${productName}" eliminado con éxito.`);
         found = true;
         break; // ? Break the loop once the product entered has been found
@@ -103,11 +114,11 @@ function deleteProduct() {
   }
 }
 
-
-// ? Function t show all the products of the inventory
+// ? Function to show all the products of the inventory
 function showProducts() {
 
   alert("Productos registrados: " + JSON.stringify(products, null, 2));
-  console.log("Productos registrados", products);
+  alert("Productos unicos registrados: " + JSON.stringify(setProducts, null, 2));
+  alert("Productos registrados (Categoria - Producto): " + JSON.stringify(Array.from(mapProducts.entries()), null, 2));
 
 }

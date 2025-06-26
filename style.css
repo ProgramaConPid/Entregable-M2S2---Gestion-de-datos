@@ -3,6 +3,7 @@
   --gradient: linear-gradient(to right, #0f0c29, #302b63, #24243e);
 }
 
+/* General Styles */
 * {
   margin: 0;
   padding: 0;
@@ -36,7 +37,6 @@ main.main__content {
 }
 
 .container__buttons {
-  /* width: max-content; */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
