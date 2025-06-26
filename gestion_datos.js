@@ -79,25 +79,30 @@ function addProduct() {
 
 // ? Function to delete a specific product from the inventory 
 function deleteProduct() {
+  let productName = prompt("Ingresa el nombre del producto a eliminar");
 
-  let productName = prompt("Ingresa el nombre del producto a eliminar")
+  // ? Validates if productName is empty or undefined
+  if (productName === "" || productName === undefined || productName === null) {
+    alert("ERROR: No ingresaste ningún producto.");
+  } else {
+    let found = false; 
 
-  // ? Validates if productName has no content
-  if (productName === "" || productName === undefined) {
-    alert("ERROR, No ingresaste ningun producto")
-  } else if (productName) {
     for (const id in products) {
-      
-      // ? validates if the product entered by the user is in the inventory.
       if (productName.toLowerCase() === products[id].name.toLowerCase()) {
-        delete products[id]
-        alert(`Producto ${productName} Eliminado con exito`)
+        delete products[id];
+        alert(`✅ Producto "${productName}" eliminado con éxito.`);
+        found = true;
+        break; // ? Break the loop once the product entered has been found
       }
+    }
 
+    // ? Show a message if the product does not exist in the inventory
+    if (!found) {
+      alert(`❌ Producto "${productName}" no encontrado en el inventario.`);
     }
   }
-
 }
+
 
 // ? Function t show all the products of the inventory
 function showProducts() {
