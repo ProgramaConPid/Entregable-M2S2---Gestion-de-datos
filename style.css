@@ -36,19 +36,30 @@ main.main__content {
 }
 
 .container__buttons {
-  width: max-content;
+  /* width: max-content; */
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 1rem;
-  padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: .5rem;
+  padding: 2rem;
+  border: 2px solid rgba(255, 255, 255);
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, .5);
 }
 
 .container__buttons > button {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 500;
   display: inline-block;
-  padding: 10px 20px;
+  padding: 15px 30px;
   cursor: pointer;
+  background: linear-gradient(
+    to right,
+    #33001b,
+    #ff0084
+  ); 
+  border: none;
+  border-radius: .5rem;
 }

@@ -48,3 +48,61 @@ console.groupEnd()
 
 // ! Additional Functions
 // ! Incorporate Functions to addProduct, deleteProduct and showProducts
+
+// ? Function to add a new product (id, name, price)
+function addProduct() {
+
+  let id = prompt("Ingrese el ID del producto (debe ser un numero):");
+
+  // ? Validation to ensure that the ID is a number
+  while (typeof id === "undefined" || id === null || id === "") {
+    id = prompt("ID invalido. Por favor, ingrese un ID valido (debe ser un numero):");
+    if (id !== null && id !== "" && isNaN(id)) {
+      alert("El ID debe ser un numero. Intente de nuevo.");
+      id = undefined; 
+    }
+  }
+
+  let name = prompt("Ingrese el nombre del producto:");
+  let price = parseFloat(prompt("Ingrese el precio del producto:"));
+
+  // ? Validates if all the data is right
+  if (id && name && !isNaN(price)) {
+    products[id] = {id: parseInt(id), name: name, price: price};
+    setProducts.push(name);
+    mapProducts.set("name", name);
+    alert("Producto agregado exitosamente.");
+  } else {
+    alert("Datos invalidos. Por favor, intente de nuevo.");
+  }
+}
+
+// ? Function to delete a specific product from the inventory 
+function deleteProduct() {
+
+  let productName = prompt("Ingresa el nombre del producto a eliminar")
+
+  // ? Validates if productName has no content
+  if (productName === "" || productName === undefined) {
+    alert("ERROR, No ingresaste ningun producto")
+  } else if (productName) {
+    for (const id in products) {
+      
+      // ? validates if the product entered by the user is in the inventory.
+      if (productName.toLowerCase() === products[id].name.toLowerCase()) {
+        delete products[id]
+        alert(`Producto ${productName} Eliminado con exito`)
+      }
+
+    }
+  }
+
+}
+
+// ? Function t show all the products of the inventory
+function showProducts() {
+
+  alert("Productos registrados: " + JSON.stringify(products, null, 2));
+  console.log("Productos registrados", products);
+
+}
