@@ -16,7 +16,7 @@
   <!-- Main Content -->
   <main class="main__content">
     <h1 class="main__title">
-      Dashboard - Inventory Management System
+      Dashboard <br> Inventory Management System
     </h1>
 
     <!-- Dashboard Buttons -->
@@ -25,8 +25,17 @@
       <button id="deleteProduct" onclick="deleteProduct()">Delete Product</button>
       <button id="showProducts" onclick="showProducts()">Show Product</button>
     </div>
-
   </main>
+
+  <dialog id="modal">
+    <h2 class="modal__title">
+      📋 Registered Products 📋
+    </h2>
+    <div id="inventory" class="info info__inventory"></div>
+    <div id="set" class="info"></div>
+    <div id="map" class="info"></div>
+    <button id="close__modal" onclick="closeModal()">Cerrar</button>
+  </dialog>
   
   <!-- JS File -->
   <script src="./gestion_datos.js"></script>

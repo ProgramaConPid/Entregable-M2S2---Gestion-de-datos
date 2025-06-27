@@ -8,19 +8,20 @@ let products = {
   3: {id: 3, name: "Diademas Sony", price: 250}
 }
 
-console.log("Productos registrados en el inventario", products);
+console.log("Registered products in the inventory", products);
 
 // ? Avoid duplicate products using Set
 let setProducts = Object.values(products).map((product) => product.name)
-console.log("Set de productos unicos", setProducts);
+console.log("Set of unique products", setProducts);
 
 // ? Create a map to asscoiate each category with their respective product
 let mapProducts = new Map([
-  ["Electronica", `${products[1].name}`],
-  ["Accesorios", `${products[2].name}`],
-  ["Accsesorios", `${products[3].name}`],
+  ["Electronic", `${products[1].name}`],
+  ["Accesories", `${products[2].name}`],
+  ["Headphones", `${products[3].name}`],
 ])
-console.log("Mapa de productos y categorias", mapProducts);
+
+console.log("Map - Category and Product", mapProducts);
 
 // ? Iterate the object using the loop for in
 for (const id in products) {
@@ -29,7 +30,7 @@ for (const id in products) {
 
 // ? Iterate the Set using the loop for of
 for (const product of setProducts) {
-  console.log(`Producto unico: ${product}`);
+  console.log(`Unique product: ${product}`);
 }
 
 // ? Iterate the Map using the loop forEach
@@ -41,27 +42,40 @@ mapProducts.forEach((product, key) => {
 })
 
 // ? Testing and Validations
-console.group("Pruebas y Validaciones");
-console.log("Productos registrados: ", products);
-console.log("Productos registrados unicos: ", setProducts);
-console.log("Categorias y productos: ", mapProducts);
+console.group("Testing and Validations");
+console.log("Registered Products: ", products);
+console.log("Unique products registered: ", setProducts);
+console.log("Categories and Products: ", mapProducts);
 console.groupEnd()
 
 // ! Additional Functions
 // ! Incorporate Functions to addProduct, deleteProduct and showProducts
 
+const modalWindow = document.getElementById("modal")
+const inventoryContainer = document.getElementById("inventory")
+const setContainer = document.getElementById("set")
+const mapContainer = document.getElementById("map")
+const closeModalBtn = document.getElementById("close__modal")
+
 // ? Function to add a new product (id, name, price)
 function addProduct() {
 
   let id = prompt("Enter the ID of the product (must be a number):");
-
+  
   // ? Validation to ensure that the ID is a number
-  while (typeof id === "undefined" || id === null || id === "") {
+  while (typeof id === "undefined" || id === null || id === "" || isNaN(id)) {
     id = prompt("Invalid ID. Please, Enter a valid ID (must be a number):");
+
     if (id !== null && id !== "" && isNaN(id)) {
       alert("The ID must be a number. Try again.");
       id = undefined; 
     }
+  }
+
+  // ? Validates if the ID already exists in the products object
+  if (products[id]) {
+    alert(`The ID ${id} already exists in the inventory. Please enter a unique ID.`);
+    return; // Exit the function if the ID already exists
   }
 
   let name = prompt("Enter de name of the product:");
@@ -114,11 +128,54 @@ function deleteProduct() {
   }
 }
 
+
 // ? Function to show all the products of the inventory
 function showProducts() {
 
-  alert("Registered products: " + JSON.stringify(products, null, 2));
-  alert("Registered unique products: " + JSON.stringify(setProducts, null, 2));
-  alert("Registered products (Category - Product): " + JSON.stringify(Array.from(mapProducts.entries()), null, 2));
+  let inventoryKeys = Object.keys(products)
 
+  if (inventoryKeys.length === 0) {
+    alert("No products registered in the inventory.");
+    return;
+  } else {
+    inventoryContainer.innerHTML = "<h2>Inventory Products</h2>";
+    setContainer.innerHTML = "<h2>Unique Products</h2>";
+    mapContainer.innerHTML = "<h2>Category - Product</h2>";
+
+    // ? Iterate through the products object to display each product
+    for (const id in products) {
+      inventoryContainer.innerHTML += `<p>🆔: ${products[id].id}, Name: ${products[id].name}, Price: $${products[id].price}</p>`;
+    }
+
+    // ? Display unique products
+    setProducts.forEach(product => {
+      setContainer.innerHTML += `<p class="center">${product}</p>`;
+    });
+
+    // ? Display category and product from the Map
+    mapProducts.forEach((product, category) => {
+      mapContainer.innerHTML += `<p>Category: ${category} - Product: ${product}</p>`;
+    });
+
+    // ? Open the modal window to show the products
+    modalWindow.showModal();
+    modalWindow.classList.add("open");
+
+    // ? Log the products, unique products, and categories with their respective products (updated)
+    console.log("Resgistered products in the inventory:", products);
+    console.log("Unique products in the inventory:", setProducts);
+    console.log("Categories and Products in the Map:", mapProducts);
+  }
+}
+
+// ? Function to close the modal window
+function closeModal() {
+  if (modalWindow.open) {
+    modalWindow.close();
+    modalWindow.classList.remove("open");
+    console.log("Modal closed successfully.");
+  }
+  else {
+    console.warn("Modal is not open. Cannot close.");
+  }
 }
