@@ -53,39 +53,39 @@ console.groupEnd()
 // ? Function to add a new product (id, name, price)
 function addProduct() {
 
-  let id = prompt("Ingrese el ID del producto (debe ser un numero):");
+  let id = prompt("Enter the ID of the product (must be a number):");
 
   // ? Validation to ensure that the ID is a number
   while (typeof id === "undefined" || id === null || id === "") {
-    id = prompt("ID invalido. Por favor, ingrese un ID valido (debe ser un numero):");
+    id = prompt("Invalid ID. Please, Enter a valid ID (must be a number):");
     if (id !== null && id !== "" && isNaN(id)) {
-      alert("El ID debe ser un numero. Intente de nuevo.");
+      alert("The ID must be a number. Try again.");
       id = undefined; 
     }
   }
 
-  let name = prompt("Ingrese el nombre del producto:");
-  let category = prompt("Ingresa la categoria del producto:")
-  let price = parseFloat(prompt("Ingrese el precio del producto:"));
+  let name = prompt("Enter de name of the product:");
+  let category = prompt("Enter the category of the product:")
+  let price = parseFloat(prompt("Enter the price of the product:"));
 
   // ? Validates if all the data is right
   if (id && name && category && !isNaN(price)) {
     products[id] = {id: parseInt(id), name: name, price: price};
     setProducts.push(name);
     mapProducts.set(category, name);
-    alert("Producto agregado exitosamente.");
+    alert("Product added succesfully.");
   } else {
-    alert("Datos invalidos. Por favor, intente de nuevo.");
+    alert("Invalid data. Please, try again.");
   }
 }
 
 // ? Function to delete a specific product from the inventory 
 function deleteProduct() {
-  let productName = prompt("Ingresa el nombre del producto a eliminar");
+  let productName = prompt("Enter the name of the product to delete:");
 
   // ? Validates if productName is empty or undefined
   if (productName === "" || productName === undefined || productName === null) {
-    alert("ERROR: No ingresaste ningún producto.");
+    alert("ERROR: You did not entered a product.");
   } else {
     let found = false; 
 
@@ -101,7 +101,7 @@ function deleteProduct() {
         });
         // ? Remove the product from the setProducts array
         setProducts = setProducts.filter(product => product.toLowerCase() !== productName.toLowerCase());
-        alert(`✅ Producto "${productName}" eliminado con éxito.`);
+        alert(`✅ Product "${productName}" deleted succesfully`);
         found = true;
         break; // ? Break the loop once the product entered has been found
       }
@@ -109,7 +109,7 @@ function deleteProduct() {
 
     // ? Show a message if the product does not exist in the inventory
     if (!found) {
-      alert(`❌ Producto "${productName}" no encontrado en el inventario.`);
+      alert(`❌ Product "${productName}" not found in the inventory`);
     }
   }
 }
@@ -117,8 +117,8 @@ function deleteProduct() {
 // ? Function to show all the products of the inventory
 function showProducts() {
 
-  alert("Productos registrados: " + JSON.stringify(products, null, 2));
-  alert("Productos unicos registrados: " + JSON.stringify(setProducts, null, 2));
-  alert("Productos registrados (Categoria - Producto): " + JSON.stringify(Array.from(mapProducts.entries()), null, 2));
+  alert("Registered products: " + JSON.stringify(products, null, 2));
+  alert("Registered unique products: " + JSON.stringify(setProducts, null, 2));
+  alert("Registered products (Category - Product): " + JSON.stringify(Array.from(mapProducts.entries()), null, 2));
 
 }
